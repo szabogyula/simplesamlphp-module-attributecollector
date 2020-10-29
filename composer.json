@@ -1,5 +1,5 @@
 {
-    "name": "niif/simplesamlphp-module-attributecollector",
+    "name": "szabogyula/simplesamlphp-module-attributecollector",
     "description": "Collect attributes from backend databases like sql or ldap",
     "type": "simplesamlphp-module",
     "require": {
