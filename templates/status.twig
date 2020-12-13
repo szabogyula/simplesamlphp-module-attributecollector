@@ -1,0 +1,49 @@
+{% set pagetitle = 'AttributeCollector tester'|trans %}
+{% extends 'base.twig' %}
+
+{% block content %}
+<h2>{{ pagetitle }}</h2>
+
+<h2>{{ 'Query'|trans }}</h2>
+{% set items = attributes %}
+
+<code>{{ query }}</code>
+
+<form class="pure-form pure-form-aligned" action="testcollector.php" method="POST">
+    <fieldset>
+        <legend>Collect attributes to specific uid</legend>
+        <div class="pure-control-group">
+          <label for="aligned-name">:uidfield</label>
+        <input type="text" name="uid" />
+        </div>
+        <div class="pure-controls">
+          <button type="submit" class="pure-button pure-button-primary">Collect</button>
+        </div>
+    </fieldset>
+</form>
+
+{% embed '_table.twig' -%}
+
+    {% block namecol -%}
+    {% set translated = name|trans %}
+    <td class="attrname">{% if translated != name %} {{ translated }} <br>{% endif %} <samp>{{ name }}</samp></td>
+    {% endblock %}
+
+
+    {% block value -%}
+    {% if name =='jpegPhoto'-%}
+        <img src="data:image/jpeg;base64,{{ value }}" />
+    {% else %}{{ value }}{% endif -%}
+    {% endblock %}
+
+{%- endembed %}
+
+{% if debug %}
+<h4>debug</h4>
+<pre>
+{{ debug }}
+</pre>
+{% endif %}
+
+{% endblock %}
+
