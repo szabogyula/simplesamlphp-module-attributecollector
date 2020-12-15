@@ -9,9 +9,9 @@ SimpleSAML\Logger::info('SAML2.0 - AttributeCollector module test endpoint');
 
 $config = SimpleSAML\Configuration::getInstance();
 $configauthprocs = [
-    $config->getArray('authproc.aa', NULL);
-    $config->getArray('authproc.sp', NULL);
-    $config->getArray('authproc.idp', NULL);
+    $config->getArray('authproc.aa', NULL),
+    $config->getArray('authproc.sp', NULL),
+    $config->getArray('authproc.idp', NULL),
     ];
 
 // test only the first collector in authproces
