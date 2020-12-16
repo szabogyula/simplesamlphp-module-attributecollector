@@ -173,10 +173,12 @@ class sspmod_attributecollector_Collector_SQLCOllector extends sspmod_attributec
      */
     public function getAttributes($originalAttributes, $uidfield)
     {
+        $this->logger_debug('query: '.var_export($this->query[$this->current], true));
+        $this->logger_debug('originalAttributes: '.var_export($originalAttributes, true));
+        $this->logger_debug('uidfield: '.$uidfield);
+        $this->logger_debug('discriminator assert: '.assert('array_key_exists($uidfield, $originalAttributes)'));
+
         assert('array_key_exists($uidfield, $originalAttributes)');
-        SimpleSAML\Logger::debug('attributecollector:SQLCollector query: '.var_export($this->query[$this->current], true));
-        SimpleSAML\Logger::debug('attributecollector:SQLCollector originalAttributes: '.var_export($originalAttributes, true));
-        SimpleSAML\Logger::debug('attributecollector:SQLCollector uidfiled: '.$uidfield);
         
         $db = $this->getDB();
         $st = $db->prepare($this->query[$this->current]);
@@ -215,7 +217,7 @@ class sspmod_attributecollector_Collector_SQLCOllector extends sspmod_attributec
             $result[$colum] = array_unique($data);
         }
 
-        SimpleSAML\Logger::debug('attributecollector:SQLCollector result: '.var_export($this->result, true));
+        $this->logger_debug('result: '.var_export($this->result, true));
         
         return $result;
     }
@@ -306,5 +308,9 @@ class sspmod_attributecollector_Collector_SQLCOllector extends sspmod_attributec
         }
 
         return $entries;
+    }
+    
+    private function logger_debug($message) {
+        SimpleSAML\Logger::debug('[ac] attributecollector:SQLCollector '.$message);
     }
 }
