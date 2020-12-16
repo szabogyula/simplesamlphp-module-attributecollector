@@ -175,6 +175,8 @@ class sspmod_attributecollector_Collector_SQLCOllector extends sspmod_attributec
     {
         assert('array_key_exists($uidfield, $originalAttributes)');
         SimpleSAML\Logger::debug('attributecollector:SQLCollector query: '.var_export($this->query[$this->current], true));
+        SimpleSAML\Logger::debug('attributecollector:SQLCollector originalAttributes: '.var_export($originalAttributes, true));
+        SimpleSAML\Logger::debug('attributecollector:SQLCollector uidfiled: '.$uidfield);
         
         $db = $this->getDB();
         $st = $db->prepare($this->query[$this->current]);
