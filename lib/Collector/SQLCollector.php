@@ -174,6 +174,8 @@ class sspmod_attributecollector_Collector_SQLCOllector extends sspmod_attributec
     public function getAttributes($originalAttributes, $uidfield)
     {
         assert('array_key_exists($uidfield, $originalAttributes)');
+        SimpleSAML\Logger::debug('attributecollector:SQLCollector query: '.var_export($this->query[$this->current], true));
+        
         $db = $this->getDB();
         $st = $db->prepare($this->query[$this->current]);
         if (false === $st) {
@@ -211,6 +213,8 @@ class sspmod_attributecollector_Collector_SQLCOllector extends sspmod_attributec
             $result[$colum] = array_unique($data);
         }
 
+        SimpleSAML\Logger::debug('attributecollector:SQLCollector result: '.var_export($this->result, true));
+        
         return $result;
     }
 
